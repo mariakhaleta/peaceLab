@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+project.ext {
+    supportLibraryVersion = "26.1.0"
+    daggerVersion = "2.13"
+    butterKnifeVersion = "10.0.0"
+    rxJavaVersion = "2.1.0"
+    rxAndroidVersion = "2.0.1"
+    timberVersion = "4.6.0"
+    lifecycleVersion = "2.1.0-alpha01"
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.pavlomuratov.pictureeditor"
+        minSdkVersion 24
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.2.0-alpha01'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Picture Editor Lib
+    implementation project(':pictureeditorlib')
+
+    // Google Material
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:$project.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$project.lifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$project.lifecycleVersion"
+
+    // Dagger core
+    annotationProcessor "com.google.dagger:dagger-compiler:$project.daggerVersion"
+    implementation "com.google.dagger:dagger:$project.daggerVersion"
+
+    // Dagger Android
+    annotationProcessor "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$project.daggerVersion"
+
+    // ButterKnife
+    implementation "com.jakewharton:butterknife:$project.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterKnifeVersion"
+
+    // ReactiveX
+    implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$project.timberVersion"
+}
